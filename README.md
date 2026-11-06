@@ -160,20 +160,19 @@ Table 1 gives length ranges for every NSP and structural protein across the huma
 § 2004
 § https://pmc.ncbi.nlm.nih.gov/articles/PMC479063/
  
-Gene order 5'-ORF1a-ORF1b-NS2-HE-S-NS12.9-E-M-N-3'. NS2, HE and NS12.9 are listed as genes and are part of the feature table. **[confirm title, authors, year]**
+Gene order 5'-ORF1a-ORF1b-NS2-HE-S-NS12.9-E-M-N-3'. NS2, HE and NS12.9 are listed as genes and are part of the feature table. **[find the full paper]**
  
 § Zhang R, et al. The ns12.9 accessory protein of human coronavirus OC43 is a viroporin involved in virion morphogenesis and pathogenesis.
 § 2015
 § https://doi.org/10.1128/JVI.01986-15
  
-NS12.9 is a protein encoded in the OC43 genome (gene overlapping the start of E). **[confirm author list]**
+NS12.9 is a protein encoded in the OC43 genome (gene overlapping the start of E).
  
 § Antiviral gene expression profile during HCoV-OC43 infection.
 § 2018
 § https://doi.org/10.1007/s00705-018-3832-8
  
-Uses the alternative names ns2a and ns5a for the same accessory genes. **[confirm authors]**
- 
+Uses the alternative names ns2a and ns5a for the same accessory genes.
 § Study of the I (internal) accessory proteins of HCoV-HKU1 (ORF 7b) and HCoV-OC43 (ORF 8b).
 § 2025
 § PMID 41348903
