@@ -38,7 +38,7 @@ Files in this folder:
 | `all_refstrain_prot_startToStopPos.tsv` | all five, concatenated | |
 
 ---
-Ref templates were extracted from NCBI Virus database, uploaded to [Ref template folder](./NCBI_ref_tempaltes)
+Ref templates were extracted from NCBI Virus database, uploaded to [Ref template folder](./NCBI_ref_templates)
 
 ## 1. Seasonal human coronaviruses
 
