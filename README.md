@@ -4,11 +4,10 @@ Annotation tables (protein name + start-stop position on a reference genome) use
 
 Generated:
 1. [Seasonal human coronaviruses](#1-seasonal-human-coronaviruses)
-   - [1.1 General features of the four viruses](#11-general-features-of-the-four-viruses)
-   - [1.2 HCoV-229E](#12-hcov-229e)
-   - [1.3 HCoV-NL63](#13-hcov-nl63)
-   - [1.4 HCoV-OC43](#14-hcov-oc43)
-   - [1.5 HCoV-HKU1](#15-hcov-hku1)
+   - [1.1 HCoV-229E](#12-hcov-229e)
+   - [1.2 HCoV-NL63](#13-hcov-nl63)
+   - [1.3 HCoV-OC43](#14-hcov-oc43)
+   - [1.4 HCoV-HKU1](#15-hcov-hku1)
 2. [Human metapneumovirus (hMPV)](#2-human-metapneumovirus-hmpv) (stub)
 
 ## File format
@@ -79,7 +78,7 @@ table cited in [12].
 
 ---
 
-### 1.2 HCoV-229E
+### 1.1 HCoV-229E
 
 **Reference.** NC_002645.1, the Wuerzburg prototype (27,317 nt). 
 
@@ -100,7 +99,7 @@ table cited in [12].
 
 ---
 
-### 1.3 HCoV-NL63
+### 1.2 HCoV-NL63
 
 **Reference.** NC_005831.2, strain Amsterdam I (27,553 nt).
 
@@ -118,7 +117,7 @@ table cited in [12].
 
 ---
 
-### 1.4 HCoV-OC43
+### 1.3 HCoV-OC43
 
 **Reference.** NC_006213.1, strain ATCC VR-759 (30,741 nt); the record is identical to AY585228.
 | NSP12 | 13317-16099 | I | 29140-29322 |
@@ -138,7 +137,7 @@ table cited in [12].
 
 ---
 
-### 1.5 HCoV-HKU1
+### 1.4 HCoV-HKU1
 
 **Reference.** NC_006577.2 (29,926 nt), isolate HKU1, genotype A, derived from AY597011. 
 **Distinctive features.**
