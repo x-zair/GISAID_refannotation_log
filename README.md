@@ -1,10 +1,6 @@
 # Reference protein annotation tables for CoVsurver
 
-Annotation tables (protein name + start-stop position on a reference genome) used to extend CoVsurver-style
-mutation reporting from SARS-CoV-2 to the other seasonal respiratory viruses.
-
-> Status: draft, 2026-11-06. Section 1 (seasonal human coronaviruses) is complete. Section 2 (hMPV) is a stub.
-> Items marked **[confirm]** need a decision from the CoVsurver maintainers or a check against the primary paper.
+Annotation tables (protein name + start-stop position on a reference genome) used to extend Episurver-style
 
 ## Contents
 
@@ -30,17 +26,6 @@ One tab-separated file per virus, no header, CRLF line endings, modelled on `oro
 | 3 | `start-stop`, 1-based, inclusive, on the reference genome | `9188-10093` |
 | 4 | Strand | `positive` |
 
-The OROV example has a fifth column (genome segment: S, M or L). The coronaviruses and hMPV are not segmented, so
-the segment column is dropped here. **[confirm]** that CoVsurver does not require it.
-
-Coordinate conventions used in every file:
-
-- Open reading frames (S, E, M, N, accessory genes, hMPV genes) include the stop codon, as in the GenBank CDS feature.
-- Replicase products (NSP1-NSP16) end before the stop codon of ORF1a / ORF1ab.
-- Products that span the -1 ribosomal frameshift (NSP12) are listed first-nucleotide to last-nucleotide on the genome.
-  The single overlapping nucleotide at the frameshift is therefore counted once, so NSP12 spans one nucleotide fewer
-  than three times its length.
-
 Files in this folder:
 
 | File | Virus | Reference record |
@@ -53,6 +38,7 @@ Files in this folder:
 | `all_refstrain_prot_startToStopPos.tsv` | all five, concatenated | |
 
 ---
+Ref templates were extracted from NCBI Virus database, uploaded to [Ref template folder](./NCBI_ref_tempaltes)
 
 ## 1. Seasonal human coronaviruses
 
