@@ -21,6 +21,7 @@ One tab-separated file per virus, no header, CRLF line endings, modelled on `oro
 | 3 | `start-stop`, 1-based, inclusive, on the reference genome | `9188-10093` |
 | 4 | Strand | `positive` |
 
+
 Files in this folder:
 
 | File | Virus | Reference record |
@@ -34,8 +35,34 @@ Files in this folder:
 Ref templates were extracted from NCBI Virus database, uploaded to [Ref template folder](./NCBI_ref_templates)
 
 ## 1. Seasonal human coronaviruses
+
+Coordinate conventions used in every file:
+
+- Open reading frames (S, E, M, N, accessory genes, hMPV genes) include the stop codon, as in the GenBank CDS feature.
+- Replicase products (NSP1-NSP16) end before the stop codon of ORF1a / ORF1ab.
+- Products that span the -1 ribosomal frameshift (NSP12) are listed first-nucleotide to last-nucleotide on the genome.
+  The single overlapping nucleotide at the frameshift is therefore counted once, so NSP12 spans one nucleotide fewer
+  than three times its length.
+
 **Distinctive features.**
  
+| | 229E | NL63 | OC43 | HKU1 |
+|---|---|---|---|---|
+| Reference | NC_002645.1 | NC_005831.2 | NC_006213.1 | NC_006577.2 |
+| Subgenus | Duvinacovirus | Setracovirus | Embecovirus | Embecovirus |
+| NSP1-16 + S, E, M, N | yes | yes | yes | yes |
+| HE gene | no | no | yes | yes |
+| Accessory genes in table | ORF4a, ORF4b | ORF3 | NS2, NS12.9 | ORF4 |
+| Internal gene inside N | no | no | I | N2 |
+| Rows in table | 22 | 21 | 24 | 23 |
+| NSPs annotated in the record | legacy names | none | yes | yes |
+| Main adjustment | legacy names to NSPs; NSP11 added | NSPs from UniProt; NSP11 inferred | I added; names capitalised | reference swapped; ORF4 named from gene |
+
+Genome and spike lengths are taken from the reference GenBank records. Receptor assignments are from the review
+table cited in [12].
+
+---
+
 - **Split ORF4a / ORF4b.** The prototype has two accessory ORFs between S and E. Dijkman et al. showed that this is a
   laboratory artefact: the cell-culture-adapted prototype carries a 2-nucleotide deletion, whereas all clinical isolates they
   examined carry a single 660-nt ORF encoding a 219-residue protein, a homologue of the ORF3 proteins of NL63 and PEDV [13].
@@ -48,33 +75,6 @@ Ref templates were extracted from NCBI Virus database, uploaded to [Ref template
   pp1a/pp1ab by the papain-like protease at Gly111|Asn112 [14], and the main protease cuts at Q2965/A2966, Q3267/S3268,
   Q3546/S3547, Q3629/S3630, Q3824/N3825 and Q3933/A3934 [15]. These correspond to the starts of NSP2, NSP5, NSP6, NSP7,
   NSP8, NSP9 and NSP10 in the table.
-
-
-**Summary of the four references.**
-
-| | HCoV-229E | HCoV-NL63 | HCoV-OC43 | HCoV-HKU1 |
-|---|---|---|---|---|
-| Genus / subgenus | Alpha / Duvinacovirus | Alpha / Setracovirus | Beta / Embecovirus | Beta / Embecovirus |
-| Reference record | NC_002645.1 | NC_005831.2 | NC_006213.1 | NC_006577.2 |
-| Reference strain | Wuerzburg (prototype) | Amsterdam I | ATCC VR-759 | HKU1 (genotype A) |
-| Genome length (nt) | 27,317 | 27,553 | 30,741 | 29,926 |
-| Spike length (aa) | 1,173 | 1,356 | 1,353 | 1,356 |
-| Receptor | Aminopeptidase N [12] | ACE2 [12] | 9-O-acetylated sialic acid [12] | 9-O-acetylated sialic acid [12] |
-| HE gene | No | No | Yes | Yes |
-| Virus-specific genes in the tables | ORF4a, ORF4b | ORF3 | NS2, HE, NS12.9, I | HE, ORF4, N2 |
-
-Genome and spike lengths are taken from the reference GenBank records. Receptor assignments are from the review
-table cited in [12].
-
-**Naming rules used in the tables.**
-
-| Rule | Reason |
-|---|---|
-| Upper-case `NSP1`...`NSP16` | matches the CoVsurver SARS-CoV-2 report (`NSP12_P323L`) |
-| `S`, `E`, `M`, `N` for the structural genes | shared names across all four viruses |
-| Accessory genes keep the name used for that virus in the literature | no cross-virus equivalent exists |
-| No separate ORF1a / ORF1ab rows | the OROV example lists one row per product |
-| NSP11 included | NSP11 appears in the SARS-CoV-2 report |
 
 ---
 
@@ -82,39 +82,88 @@ table cited in [12].
 
 **Reference.** NC_002645.1, the Wuerzburg prototype (27,317 nt). 
 
-**Distinctive features.**
+**Literature support:**
 
-- **Split ORF4a / ORF4b.** The prototype has two accessory ORFs between S and E. Dijkman et al. showed that this is a
-  laboratory artefact: the cell-culture-adapted prototype carries a 2-nucleotide deletion, whereas all clinical isolates they
-  examined carry a single 660-nt ORF encoding a 219-residue protein, a homologue of the ORF3 proteins of NL63 and PEDV [13].
-  Practical consequence: the table follows the NC_002645.1 annotation (ORF4a, ORF4b), but mutations in clinical sequences in
-  this region may be better described on a single ORF4. **[confirm]**
-- **No HE gene.** The genome organisation of 229E matches that of NL63 and PEDV: replicase, S, one accessory gene region, E, M, N [13].
-- **Receptor and spike.** Aminopeptidase N is the receptor [12]. The 1,173-residue spike is the shortest of the four [5].
-- **Legacy replicase annotation.** The GenBank record uses pre-standard product names (p9, p87, p195/p210, p44, ...).
-  The standard numbering was checked against experimental cleavage data: p9 (nsp1) is released from the N-terminus of
-  pp1a/pp1ab by the papain-like protease at Gly111|Asn112 [14], and the main protease cuts at Q2965/A2966, Q3267/S3268,
-  Q3546/S3547, Q3629/S3630, Q3824/N3825 and Q3933/A3934 [15]. These correspond to the starts of NSP2, NSP5, NSP6, NSP7,
-  NSP8, NSP9 and NSP10 in the table.
+§ Dijkman R, Jebbink MF, Wilbrink B, et al. Human coronavirus 229E encodes a single ORF4 protein between the spike and the envelope genes.
+§ 2006
+§ https://doi.org/10.1186/1743-422X-3-106
 
+The 229E prototype has two small genes between S and E (ORF4a, ORF4b). Clinical isolates carry one ORF4 gene instead; the split in the prototype comes from a 2-nt deletion. Either way the region encodes accessory protein(s) and is part of the feature table.
+
+§ Herold J, Gorbalenya AE, Thiel V, Schelle B, Siddell SG. Proteolytic processing at the amino terminus of human coronavirus 229E gene 1-encoded polyproteins.
+§ 1998
+§ https://doi.org/10.1128/jvi.72.2.910-918.1998
+
+First product of pp1a/pp1ab (p9 in the old GenBank naming = NSP1) is released by cleavage at Gly111|Asn112. This is the boundary between NSP1 and NSP2 in the table.
+
+§ Ziebuhr J, Siddell SG. Processing of the human coronavirus 229E replicase polyproteins by the virus-encoded 3C-like proteinase.
+§ 1999
+§ https://doi.org/10.1128/jvi.73.1.177-185.1999
+
+Main-protease cleavage sites mapped experimentally (Q2965/A2966, Q3267/S3268, Q3546/S3547, Q3629/S3630, Q3824/N3825, Q3933/A3934). These match the starts of NSP5, NSP6, NSP7, NSP8, NSP9, NSP10 in the table.
+
+§ Ziebuhr J. The coronavirus replicase: insights into a sophisticated enzyme machinery.
+§ 2006
+§ https://pmc.ncbi.nlm.nih.gov/articles/PMC7123892/
+
+Standard description of pp1a (nsp1-11) and pp1ab (nsp1-10, nsp12-16) and of the -1 ribosomal frameshift between ORF1a and ORF1b. Basis for the NSP1-NSP16 naming.
+
+§ Schamoni-Kast K, Krichel B, Damjanovic T, et al. The kinetics of nsp7-11 polyprotein processing and impact on complexation with nsp16 among human coronaviruses.
+§ 2025
+§ https://doi.org/10.1038/s41467-025-61554-y
+
+Treats nsp11 as a short peptide at the end of pp1a for 229E and the other seasonal HCoVs.
+
+**Adjustments and justification:**
+
+1. **Legacy replicase names converted to NSP1-NSP16.** The GenBank record uses pre-standard names (p9, p87, p195/p210, p44, ...). For a table that CoVsurver matches against SARS-CoV-2-style output, the NSP names are the common vocabulary. Boundaries were not changed; only names. Checked against the cleavage sites above and UniProt P0C6X1 (all 15 residue ranges match, see section 3).
+2. **NSP11 added (12497-12547).** The record annotates a 17-residue peptide at the end of ORF1a; NSP11 is reported in the SARS-CoV-2 CoVsurver output, so it is kept. Its span is 51 nt = 17 codons, ending at the ORF1a stop.
+3. **NSP12 starts at the same nucleotide as NSP11 (12497).** NSP12 is the first protein of ORF1b, but in the genome the shared NSP11/NSP12 start is the same residue. NSP12 is 12497-15276, which is 1 nt shorter than 3 x length because the frameshift overlap is counted once. An earlier draft started NSP12 at 12520 (the frameshift site); that was changed.
+4. **NSP11 end corrected from 12660 to 12547.** 12497-12660 is 164 nt, not a multiple of 3, and runs past the ORF1a stop.
+5. **ORF4a / ORF4b kept as two rows** because this follows the reference record. A single ORF4 row may be preferable for clinical sequences (open item).
+6. **ORF1a and ORF1ab rows omitted.** They are polyproteins, not mature products, and the OROV example does not list them.
+7. **Stop codons.** ORFs (S, ORF4a, ORF4b, E, M, N) include the stop codon, NSPs do not, matching the OROV table convention.
 ---
 
 ### 1.2 HCoV-NL63
 
 **Reference.** NC_005831.2, strain Amsterdam I (27,553 nt).
 
-- **Gene order 1a-1b-S-ORF3-E-M-N.** One accessory gene, ORF3, between S and E; the genome has a very low GC content
-  (34%) [16]. There is no HE gene [10].
-- **ACE2 receptor.** NL63 uses angiotensin-converting enzyme 2, the same receptor as SARS-CoV [12].
-- **Large spike.** The 1,356-residue spike is longer than that of 229E (1,173); the S1 region carries an insert not
-  found in 229E [17].
-- **Papain-like protease processing.** Two papain-like protease domains, PLP1 and PLP2, process the N-terminal region:
-  PLP1 releases nsp1 and PLP2 releases nsp2 and nsp3 [18].
-- **No nsp annotation in the RefSeq record.** The NSP rows come from UniProt P0C6X5 residue ranges (NSP1 1-110, NSP2 111-898,
-  NSP3 899-2462, NSP4 2463-2939, NSP5 2940-3242, ... NSP16 6430-6729), converted to genome positions across the frameshift [12].
-  UniProt did not give the NSP16 end in the source used, so NSP16 runs to the end of pp1ab. NSP11 is inferred as the last 17 residues
-  of ORF1a (12416-12466), the same length as in 229E. **[confirm]**
+**Literature support:**
 
+§ Pyrc K, Jebbink MF, Berkhout B, van der Hoek L. Genome structure and transcriptional regulation of human coronavirus NL63.
+§ 2004
+§ https://doi.org/10.1186/1743-422X-1-7
+
+Describes the NL63 gene order: ORF1a, ORF1b, S, ORF3, E, M, N. ORF3 is the single accessory gene and is part of the feature table.
+
+§ Review of human coronavirus spike proteins, receptors and UniProt IDs (Table 3, UniProtKB ranges).
+§ 2020
+§ https://pmc.ncbi.nlm.nih.gov/articles/PMC7604128/
+
+Gives NL63 pp1ab chain ranges (UniProt P0C6X5): NSP1 1-110, NSP2 111-898, NSP3 899-2462, ..., NSP16 6430-6729. Used as the source of NSP boundaries because the RefSeq record has no NSP annotation. **[confirm authors and title]**
+
+§ Chen Z, Wang Y, Ratia K, Mesecar AD, Wilkinson KD, Baker SC. Proteolytic processing and deubiquitinating activity of papain-like proteases of human coronavirus NL63.
+§ 2007
+§ https://doi.org/10.1128/JVI.02747-06
+
+Two papain-like protease domains cut the N-terminal region of the replicase; consistent with NSP1, NSP2, NSP3 being separate products at the start of the table.
+
+§ Ma M, Yang Y, Wu L, et al. Conserved protein targets for developing pan-coronavirus drugs based on sequence and 3D structure similarity analyses.
+§ 2022
+§ https://doi.org/10.1016/j.compbiomed.2022.105455
+
+Table 1 gives length ranges for every NSP and structural protein across the human coronaviruses. All NL63 rows fall inside those ranges.
+
+**Adjustments and justification:**
+
+1. **NSP rows derived from UniProt, not from the record.** The NC_005831.2 record annotates only ORF1a and ORF1ab as polyproteins. Residue ranges from UniProt P0C6X5 were converted to genome positions with the frameshift taken into account (residues before the frameshift: 3 nt each; after: shifted by 1 nt). Check: every NSP is a whole number of codons, consecutive NSPs are contiguous, NSP1 starts at the ORF1ab start and NSP16 ends one stop codon before the ORF1ab end.
+2. **NSP11 inferred (12416-12466).** UniProt does not list it as a chain. It is taken as the last 17 residues of ORF1a (same length as 229E) so that the table has the same 16 NSPs as the others. This is the one NL63 row not backed by a source. **[confirm]**
+3. **NSP12 starts at the NSP11 start (12416)**, same logic as 229E.
+4. **NSP14 P1 residue is His, not Gln.** The residue before NSP14 is His (the 3CL protease usually cuts after Gln). The boundary matches UniProt and is kept; it is an exception, not an error.
+5. **Spike 1,356 aa is the upper limit of the Ma range**; it is the longest of the four, so no adjustment.
+6. **ORF3 named as in the record.** It is the accessory gene between S and E and is kept under the record's name.
+7. **No HE row**: the record has no HE gene, so none is added.
 ---
 
 ### 1.3 HCoV-OC43
@@ -122,17 +171,6 @@ table cited in [12].
 **Reference.** NC_006213.1, strain ATCC VR-759 (30,741 nt); the record is identical to AY585228.
 | NSP12 | 13317-16099 | I | 29140-29322 |
 
-**Distinctive features.**
-
-- **HE gene.** As a lineage A betacoronavirus (Embecovirus), OC43 carries an HE gene between ORF1b and S [19]; HE is an
-  additional virion surface protein [7, 8].
-- **Accessory genes NS2 and NS12.9.** The 3' region encodes NS2, HE, S, NS12.9, E, M and N in that order. NS12.9 overlaps the
-  start of E [20]. Some papers call these genes ns2a and ns5a [21]; the table uses NS2 and NS12.9. **[confirm]** which naming
-  CoVsurver prefers.
-- **NS12.9 is a viroporin.** It forms ion channels and is needed for efficient virion morphogenesis and pathogenesis [19].
-- **Internal I protein.** An internal accessory gene overlaps N in a different reading frame in betacoronaviruses; OC43's is
-  designated ORF 8b in one recent study [22]. It is listed as `I` (29140-29322, inside N).
-- **Receptor.** 9-O-acetylated sialic acid [12].
 - **Largest NSP1.** At 246 residues, OC43 NSP1 sets the upper end of the cross-species range (110-246) [5].
 
 ---
@@ -140,39 +178,109 @@ table cited in [12].
 ### 1.4 HCoV-HKU1
 
 **Reference.** NC_006577.2 (29,926 nt), isolate HKU1, genotype A, derived from AY597011. 
-**Distinctive features.**
+ **Literature support:**
 
-- **Group 2 features.** HKU1 has HE, an ORF4 accessory gene between S and E, and an ORF8 / N2 gene inside N [10, 23].
-- **Three genotypes from recombination.** Comparison of 22 genomes showed three genotypes (A, B, C), with genotype C arising
-  from recombination between A and B near the nsp16 / HE junction [24]. The reference is genotype A. HKU1 genomes range from
-  29,295 to 30,097 nt [25].
-- **Lowest GC content.** HKU1 genomes are 32% GC, the lowest of known coronaviruses with complete genomes at the time [25].
-- **Receptor.** 9-O-acetylated sialic acid [12].
-- **Isolate-specific protein databases.** UniProt holds separate HKU1 entries for different isolates. Ma et al. 2022 [5] appear
-  to use a different isolate from the reference here: its NSP3 maximum of 1,979 residues is 50 shorter than the 2,029 in
-  NC_006577.2, and UniProt N1 gives NSP3 as 810-2838. This is not an error in the table. **[confirm]** if HKU1 will be
-  compared against another isolate.
-- **Naming.** The internal gene in N is called N2 / ORF8 in the genome papers [23] and ORF 7b in a recent study of I proteins [22];
-  these are probably the same internal ORF, but the naming differs between papers.
+§ Genome organisation of HCoV-OC43 (Table 3). PMC479063.
+§ 2004
+§ https://pmc.ncbi.nlm.nih.gov/articles/PMC479063/
+
+Gene order 5'-ORF1a-ORF1b-NS2-HE-S-NS12.9-E-M-N-3'. NS2, HE and NS12.9 are listed as genes and are part of the feature table. **[confirm title, authors, year]**
+
+§ Zhang R, et al. The ns12.9 accessory protein of human coronavirus OC43 is a viroporin involved in virion morphogenesis and pathogenesis.
+§ 2015
+§ https://doi.org/10.1128/JVI.01986-15
+
+NS12.9 is a protein encoded in the OC43 genome (gene overlapping the start of E). **[confirm author list]**
+
+§ Antiviral gene expression profile during HCoV-OC43 infection.
+§ 2018
+§ https://doi.org/10.1007/s00705-018-3832-8
+
+Uses the alternative names ns2a and ns5a for the same accessory genes. **[confirm authors]**
+
+§ Study of the I (internal) accessory proteins of HCoV-HKU1 (ORF 7b) and HCoV-OC43 (ORF 8b).
+§ 2025
+§ PMID 41348903
+
+An internal gene within N encodes the I protein in OC43. **[confirm title, journal, year]**
+
+§ Everest H, et al. Known cellular and receptor interactions of animal and human coronaviruses: a review.
+§ 2022
+§ Viruses 14:351
+
+OC43 carries an HE gene in addition to S.
+
+§ Ziebuhr J (2006) and Ma M et al. (2022), as in 1.2.
+
+OC43 NSP1 (246 aa) is within the Ma range; OC43 NSP11 is 14 aa (Ma range 13-17).
 
 ---
+**Literature support:**
 
-## 2. Human metapneumovirus (hMPV) - IN progress. 
+§ Woo PCY, Lau SKP, Chu CM, et al. Characterization and complete genome sequence of a novel coronavirus, coronavirus HKU1, from patients with pneumonia.
+§ 2005
+§ https://doi.org/10.1128/JVI.79.2.884-895.2005
 
-Stub. hMPV is not a coronavirus: it is a negative-sense, non-segmented virus (family Pneumoviridae) with no nsps and no
-S/E/M/N set. The reference is NC_039199.1 (isolate 00-1, provisional RefSeq, identical to AF371337).
+First HKU1 genome. Gene order: ORF1a, ORF1b, HE, S, ORF4, E, M, N, with an additional ORF (N2/ORF8) inside N. All of these are in the feature table.
 
-| Product | Position | Product | Position |
-|---|---|---|---|
-| N | 40-1224 | M2-2 | 5248-5463 |
-| P | 1248-2132 | SH | 5494-6045 |
-| M | 2165-2929 | G | 6247-6957 |
-| F | 3052-4671 | L | 7167-13184 |
-| M2-1 | 4737-5300 | | |
+§ Woo PCY, Lau SKP, Huang Y, et al. Comparative analysis of 22 coronavirus HKU1 genomes reveals a novel genotype and evidence of natural recombination in coronavirus HKU1.
+§ 2006
+§ https://doi.org/10.1128/JVI.00509-06 **[confirm DOI]**
 
-M2-1 and M2-2 overlap by design (one gene, two reading frames). The strain ID `hMPV_Human_2000_Netherlands-00-1` is inferred from
-the isolate name and needs checking. F is cleaved into F1 and F2, which the record does not annotate.
-Literature and the section text are still to be written.
+Defines genotypes A, B, C; the reference is genotype A, so coordinates are specific to this genotype.
+
+§ Study of the I (internal) accessory proteins of HCoV-HKU1 (ORF 7b) and HCoV-OC43 (ORF 8b). PMID 41348903.
+§ 2025
+§ (see 1.4)
+
+Calls the internal gene in N "ORF 7b" for HKU1; same ORF as N2/ORF8 in the genome papers. **[confirm]**
+
+§ Ma M, et al. (2022), https://doi.org/10.1016/j.compbiomed.2022.105455
+
+Length ranges. HKU1 rows fall inside them except NSP3 (see adjustment 4).
+
+**Adjustments and justification:**
+**Literature support:**
+
+§ Woo PCY, Lau SKP, Chu CM, et al. Characterization and complete genome sequence of a novel coronavirus, coronavirus HKU1, from patients with pneumonia.
+§ 2005
+§ https://doi.org/10.1128/JVI.79.2.884-895.2005
+
+First HKU1 genome. Gene order: ORF1a, ORF1b, HE, S, ORF4, E, M, N, with an additional ORF (N2/ORF8) inside N. All of these are in the feature table.
+
+§ Woo PCY, Lau SKP, Huang Y, et al. Comparative analysis of 22 coronavirus HKU1 genomes reveals a novel genotype and evidence of natural recombination in coronavirus HKU1.
+§ 2006
+§ https://doi.org/10.1128/JVI.00509-06 **[confirm DOI]**
+
+Defines genotypes A, B, C; the reference is genotype A, so coordinates are specific to this genotype.
+
+§ Study of the I (internal) accessory proteins of HCoV-HKU1 (ORF 7b) and HCoV-OC43 (ORF 8b). PMID 41348903.
+§ 2025
+§ (see 1.4)
+
+Calls the internal gene in N "ORF 7b" for HKU1; same ORF as N2/ORF8 in the genome papers. **[confirm]**
+
+§ Ma M, et al. (2022), https://doi.org/10.1016/j.compbiomed.2022.105455
+
+Length ranges. HKU1 rows fall inside them except NSP3 (see adjustment 4).
+
+**Adjustments and justification:**
+
+1. **Reference swapped from AY884001.1 to NC_006577.2.** Raphael's list gave AY884001.1; the NCBI record is superseded by the RefSeq NC_006577.2 (genotype A, from AY597011). The RefSeq record is the one that annotates the genes used here.
+2. **Accessory ORF4 named from the gene qualifier.** The record's product field for this gene reads "non-structural protein"; the gene qualifier (ORF4) was used instead so that the row has a meaningful name.
+3. **N2 added as its own row (28342-28959, 205 aa).** It is a gene inside N (28320-29645), in a different frame; listed because it is annotated in the record.
+4. **NSP3 length differs from Ma Table 1.** NC_006577.2 gives NSP3 = 2,029 aa (810-2838); Ma gives a maximum of 1,979 aa. This indicates a different isolate was used in Ma. The table follows the reference record.
+5. **NSP14 P1 residue is His**, as in NL63. Boundary kept (contiguous with NSP13 and NSP15; in frame).
+6. **NSP11 kept (13577-13618, 14 aa).** Same start as NSP12 (13577).
+7. **UniProt cross-check limited to NSP1-NSP9** (P0C6X2). NSP10-NSP16 are contiguous and in frame with the record but were not matched to UniProt.
+
+1. **Reference swapped from AY884001.1 to NC_006577.2.** Raphael's list gave AY884001.1; the NCBI record is superseded by the RefSeq NC_006577.2 (genotype A, from AY597011). The RefSeq record is the one that annotates the genes used here.
+2. **Accessory ORF4 named from the gene qualifier.** The record's product field for this gene reads "non-structural protein"; the gene qualifier (ORF4) was used instead so that the row has a meaningful name.
+3. **N2 added as its own row (28342-28959, 205 aa).** It is a gene inside N (28320-29645), in a different frame; listed because it is annotated in the record.
+4. **NSP3 length differs from Ma Table 1.** NC_006577.2 gives NSP3 = 2,029 aa (810-2838); Ma gives a maximum of 1,979 aa. This indicates a different isolate was used in Ma. The table follows the reference record.
+5. **NSP14 P1 residue is His**, as in NL63. Boundary kept (contiguous with NSP13 and NSP15; in frame).
+6. **NSP11 kept (13577-13618, 14 aa).** Same start as NSP12 (13577).
+7. **UniProt cross-check limited to NSP1-NSP9** (P0C6X2). NSP10-NSP16 are contiguous and in frame with the record but were not matched to UniProt.
 
 ---
 
